@@ -45,7 +45,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin Register</title>
 </head>
 
 <body>
@@ -66,8 +66,8 @@
         <form method="post">
             <h1>Admin Registration</h1>
             <input type="text" name="name" placeholder="enter your name" required>
-            <textarea type="text" name="address" placeholder="enter your address"></textarea>
-            <input type="text" name="phone" placeholder="enter your contact">
+            <textarea type="text" name="address" placeholder="enter your address" required></textarea>
+            <input type="text" name="phone" placeholder="enter your contact" required>
             <input type="email" name="email" placeholder="enter your email" required>
             <input type="password" name="password" placeholder="enter your password" required>
             <input type="password" name="cpassword" placeholder="confirm your password" required>
