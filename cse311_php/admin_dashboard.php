@@ -1,4 +1,18 @@
 <?php
+include 'connection.php';
+
+session_start();
+$admin_id = $_SESSION['admin_name'];
+
+if (!isset($admin_id)) {
+    header('location:login.php');
+}
+
+if (isset($_POST['logout'])) {
+    session_destroy();
+    header('location:login.php');
+}
+
 include('admin_header.php');
 ?>
 
@@ -14,7 +28,11 @@ include('admin_header.php');
                         <div class="cardBox">
                 <div class="card">
                     <div>
-                        <div class="numbers">1,504</div>
+                    <?php
+                $select_booked = mysqli_query($conn, "SELECT * FROM booked_flight") or die('query failed');
+                $num_of_booked = mysqli_num_rows($select_booked);
+                ?>
+                        <div class="numbers"><?php echo $num_of_booked; ?></div>
                         <div class="cardName">Total Booked</div>
                     </div>
 
@@ -25,7 +43,11 @@ include('admin_header.php');
 
                 <div class="card">
                     <div>
-                        <div class="numbers">80</div>
+                    <?php
+                $select_airport = mysqli_query($conn, "SELECT * FROM airport_list") or die('query failed');
+                $num_of_airport = mysqli_num_rows($select_airport);
+                ?>
+                        <div class="numbers"><?php echo $num_of_airport; ?></div>
                         <div class="cardName">Airport</div>
                     </div>
 
@@ -36,8 +58,13 @@ include('admin_header.php');
 
                 <div class="card">
                     <div>
-                        <div class="numbers">284</div>
-                        <div class="cardName">Department</div>
+                    <?php
+                $select_users = mysqli_query($conn, "SELECT * FROM users") or die('query failed');
+                $num_of_users = mysqli_num_rows($select_users);
+                ?>
+
+                        <div class="numbers"><?php echo $num_of_users; ?></div>
+                        <div class="cardName">Users</div>
                     </div>
 
                     <div class="iconBx">
@@ -47,6 +74,10 @@ include('admin_header.php');
 
                 <div class="card">
                     <div>
+                    <?php
+                $select_users = mysqli_query($conn, "SELECT * FROM users") or die('query failed');
+                $num_of_users = mysqli_num_rows($select_users);
+                ?>
                         <div class="numbers">$7,842</div>
                         <div class="cardName">Earning</div>
                     </div>

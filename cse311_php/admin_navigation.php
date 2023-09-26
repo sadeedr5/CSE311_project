@@ -1,3 +1,4 @@
+
 <div class="navigation">
     <ul>
         <li>
@@ -55,16 +56,16 @@
         </li>
 
         <li>
-            <a href="department_list.php">
+            <a href="user_list.php">
                 <span class="icon">
                     <ion-icon name="people-outline"></ion-icon>
                 </span>
-                <span class="title">Department</span>
+                <span class="title">Users</span>
             </a>
         </li>
 
         <li>
-            <a href="#">
+            <a href="destroy.php">
                 <span class="icon">
                     <ion-icon name="log-out-outline"></ion-icon>
                 </span>
@@ -73,3 +74,4 @@
         </li>
     </ul>
 </div>
+

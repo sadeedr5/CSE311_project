@@ -4,7 +4,7 @@
     </div>
 
     <div class="search">
-        <h3>Welcome, Administrator</h3>
+        <h3>Welcome, <?php echo $_SESSION['admin_name']; ?></h3>
     </div>
     <div class="user">
         <!-- <ion-icon name="people-outline"></ion-icon> -->

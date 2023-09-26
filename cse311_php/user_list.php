@@ -26,7 +26,7 @@ include('admin_header.php');
             include('admin_title.php');
             ?>
             <div class="table__header">
-                <h1>Customer's Booked</h1>
+                <h1>User's</h1>
                 <div class="input-group">
                     <input type="search" placeholder="Search Data...">
                     <img src="imgs/search.png" alt="">
@@ -51,25 +51,32 @@ include('admin_header.php');
                         <tr>
                             <th> Id <span class="icon-arrow">&UpArrow;</span></th>
                             <th> Name <span class="icon-arrow">&UpArrow;</span></th>
-                            <th> Contact <span class="icon-arrow">&UpArrow;</span></th>
                             <th> Address <span class="icon-arrow">&UpArrow;</span></th>
-                            <th> Airline <span class="icon-arrow">&UpArrow;</span></th>
-                            <th> Plane No. <span class="icon-arrow">&UpArrow;</span></th>
-                            <th> Location <span class="icon-arrow">&UpArrow;</span></th>
-                            <th> Departure <span class="icon-arrow">&UpArrow;</span></th>
+                            <th> Contact <span class="icon-arrow">&UpArrow;</span></th>
+                            <th> Email <span class="icon-arrow">&UpArrow;</span></th>
+                            <th> Department <span class="icon-arrow">&UpArrow;</span></th>
                         </tr>
                     </thead>
                     <tbody>
+                        <?php 
+                            $select_users = mysqli_query($conn, "SELECT user_id, name, address, contact, email, department_name FROM users, department WHERE users.department_id = department.department_id") or die('query failed');
+                            if (mysqli_num_rows($select_users) > 0) {
+                                while ($fetch_users = mysqli_fetch_assoc($select_users)) {
+                        ?>
                         <tr>
-                            <td> 1 </td>
-                            <td> Zinzu Chan Lee</td>
-                            <td> +8801934469404 </td>
-                            <td> 342/6, West Jurain, Khondokar Mahtab Uddin Road, Shympur </td>
-                            <td> test</td>
-                            <td> 1212</td>
-                            <td> Dhak, Dhaka - Test, No</td>
-                            <td> <p class="status delivered">Aug 28,2023</p></td>
+                            <td> <?php echo $fetch_users['user_id']; ?> </td>
+                            <td> <?php echo $fetch_users['name']; ?></td>
+                            <td> <?php echo $fetch_users['address']; ?> </td>
+                            <td> <?php echo $fetch_users['contact']; ?> </td>
+                            <td> <?php echo $fetch_users['email']; ?> </td>
+                            <td> <?php echo $fetch_users['department_name']; ?> </td>
                         </tr>
+                        <?php
+                }
+            } else {
+                echo '<p class="empty">no users added yet!</p>';
+            }
+            ?>
                         <!-- <tr>
                             <td> 2 </td>
                             <td><img src="images/Jeet Saru.jpg" alt=""> Jeet Saru </td>
