@@ -11,7 +11,7 @@
         $password = mysqli_real_escape_string($conn, $filter_password);
 
 
-        $query = "SELECT * FROM users WHERE email = '$email'";
+        $query = "SELECT * FROM users WHERE email = '$email' and password = '$password'";
 
         $select_user = mysqli_query($conn, $query) or die('query failed');
 
@@ -29,9 +29,9 @@
                 $_SESSION['user_id'] = $row['id'];
                 header('location:index.php');
             }
-            else {
-                $message[] = 'incorrect email or password';
-            }
+        }
+        else {
+            $message[] = 'incorrect email or password';
         }
 
     }
@@ -41,7 +41,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="head.css">
     <title>Register Page</title>
@@ -85,9 +85,13 @@
             if(isset($message)) {
                 foreach($message as $message) {
                     echo '
-                        <div class="message">
+                    <div class="message" style="
+                        text-align: center;
+                        font-size: 30px;
+                        text-transform: capitalize;
+                    ">
                             <span> '.$message.' </span>
-                            <span class="icon" onclick="this.parentElement.remove()"> close </span>
+                            <span class="icon" onclick="this.parentElement.remove()"> <i class="fa-regular fa-circle-xmark"></i> </span>
                         </div>
                     ';
                 }
@@ -106,7 +110,10 @@
                 <input type="password" name="password" placeholder="Enter your password" required>
             </div>
             <input type="submit" name="submit-btn" value="login now" class="btn">
-            <p>Don't have an account ? <a href="register.php">register now</a></p>
+            <p style="
+                    font-size: 20px;
+                    text-transform: capitalize;
+                ">Don't have an account ? <a href="register.php">register now</a></p>
         </form>
     </section>
 </body>
