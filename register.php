@@ -44,9 +44,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="head.css">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" rel="stylesheet">
     <title>Register Page</title>
 </head>
 <style>
@@ -60,15 +58,15 @@
         background-color: white;
         display: grid;
         width: 80vh;
-        height: 50vh;
+        height: 70vh;
         justify-items: center;
         align-content: center;
     }
-    label{
+    .input-field label{
         padding-top: 10px;
         font-size: 3vh;
     }
-    input[type=text]{
+    input[type=text], input[type=email], input[type=password]{
         width: 30vh;
         height: 30px;
     }
@@ -88,9 +86,13 @@
             if(isset($message)) {
                 foreach($message as $message) {
                     echo '
-                        <div class="message">
+                    <div class="message" style="
+                    text-align: center;
+                    font-size: 30px;
+                    text-transform: capitalize;
+                ">
                             <span> '.$message.' </span>
-                            <span class="icon" onclick="this.parentElement.remove()"> close </span>
+                            <span class="icon" onclick="this.parentElement.remove()"> <i class="fa-regular fa-circle-xmark"></i> </span>
                         </div>
                     ';
                 }
@@ -99,14 +101,35 @@
         ?>
         <form method="post">
             <h1>Register Now</h1>
-            <input type="text" name="name" placeholder="enter your name" required>
-            <input type="text" name="address" placeholder="enter your address" required>
-            <input type="text" name="phone" placeholder="enter your contact" required>
-            <input type="email" name="email" placeholder="enter your email" required>
-            <input type="password" name="password" placeholder="enter your password" required>
-            <input type="password" name="cpassword" placeholder="confirm your password" required>
+            <div class="input-field">
+                <label>Name</label><br>
+                <input type="text" name="name" placeholder="Enter your name" required>
+            </div>
+            <div class="input-field">
+                <label>Address</label><br>
+                <input type="text" name="address" placeholder="Enter your address" required>
+            </div>
+            <div class="input-field">
+                <label>Contact</label><br>
+                <input type="text" name="phone" placeholder="Enter your contact" required>
+            </div>
+            <div class="input-field">
+                <label>Email</label><br>
+                <input type="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="input-field">
+                <label>Password</label><br>
+                <input type="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <div class="input-field">
+                <label>Confirm Password</label><br>
+                <input type="password" name="cpassword" placeholder="Confirm your password" required>
+            </div>
             <input type="submit" name="submit-btn" value="register now" class="btn">
-            <p>already have an account ? <a href="login.php">login now</a></p>
+            <p style="
+                    font-size: 20px;
+                    text-transform: capitalize;
+                ">already have an account ? <a href="login.php">login now</a></p>
         </form>
     </section>
 </body>
