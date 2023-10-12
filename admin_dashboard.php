@@ -75,10 +75,10 @@ include('admin_header.php');
                 <div class="card">
                     <div>
                     <?php
-                $select_users = mysqli_query($conn, "SELECT * FROM users") or die('query failed');
-                $num_of_users = mysqli_num_rows($select_users);
+                $total_earning = mysqli_query($conn, "SELECT SUM(price) FROM flight_list f JOIN booked_flight b ON (b.flight_id=f.flight_id)") or die('query failed');
+                $rowData = mysqli_fetch_array($total_earning)
                 ?>
-                        <div class="numbers">$7,842</div>
+                        <div class="numbers">$<?php echo $rowData['SUM(price)']; ?></div>
                         <div class="cardName">Earning</div>
                     </div>
 
@@ -114,14 +114,19 @@ include('admin_header.php');
 							}
 							$i=1;
 							$qry = $conn->query("SELECT b.*,f.*,a.airlines,b.booked_flight_id as bid FROM  booked_flight b inner join flight_list f on f.flight_id = b.flight_id inner join airlines_list a on f.airline_id = a.airline_id  order by b.booked_flight_id desc");
-							while($row = $qry->fetch_assoc() && $i==5):
-
+							while(($row = $qry->fetch_assoc()) && $i<=6):
+                                $i++;
 						 ?>
                                 <tr>
                                     <td> <?php echo $row['name'] ?> </td>
                                     <td> <?php echo $row['contact'] ?> </td>
                                     <td> <?php echo $row['plane_no'] ?> </td>
-                                    <td><span class="status delivered"> <?php echo date('M d,Y h:i A',strtotime($row['departure_datetime'])) ?> </span></td>
+                                    <?php $currentDateTime = new DateTime('now'); 
+                                    $currentDate = $currentDateTime->format('M d,Y h:i A'); 
+                                    $del = date('M d,Y h:i A',strtotime($row['departure_datetime']));
+                                    $retVal = ($currentDate < $del) ? "status delivered" : "status return" ;
+                                    ?>
+                                    <td><span class="<?php echo $retVal ?>"> <?php echo date('M d,Y h:i A',strtotime($row['departure_datetime'])) ?> </span></td>
                                 </tr>
                         <?php endwhile; ?>
 

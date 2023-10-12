@@ -28,7 +28,7 @@
         }
         else {
             if($password!=$cpassword) {
-                $message[] = 'wrong password';
+                $message[] = 'password did not match';
             }
             else {
                 mysqli_query($conn, "INSERT INTO users (name, address, contact, email, password, department_id) VALUES ('$name', '$address', '$contact', '$email', '$password', '101')") or die('query_failed');
